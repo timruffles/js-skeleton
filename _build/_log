@@ -1,0 +1,13 @@
+### Starting build.
+# Target: main.ml.depends, tags: { bin_annot, extension:ml, file:main.ml, ocaml, ocamldep, package(lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix), quiet, strict_sequence, syntax(camlp4o), traverse, warn(A-4) }
+ocamlfind ocamldep -syntax camlp4o -package 'lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix' -modules main.ml > main.ml.depends
+# Target: main.cmo, tags: { bin_annot, byte, compile, extension:cmo, extension:ml, file:main.cmo, file:main.ml, implem, ocaml, package(lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix), quiet, strict_sequence, syntax(camlp4o), traverse, warn(A-4) }
+ocamlfind ocamlc -c -g -bin-annot -strict-sequence -syntax camlp4o -package 'lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix' -w A-4 -o main.cmo main.ml
++ ocamlfind ocamlc -c -g -bin-annot -strict-sequence -syntax camlp4o -package 'lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix' -w A-4 -o main.cmo main.ml
+File "main.ml", line 54, characters 31-35:
+Warning 27: unused variable laps.
+File "main.ml", line 61, characters 29-33:
+Warning 27: unused variable laps.
+# Target: main.byte, tags: { bin_annot, byte, dont_link_with, extension:byte, file:main.byte, link, ocaml, package(lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix), program, quiet, strict_sequence, syntax(camlp4o), traverse, warn(A-4) }
+ocamlfind ocamlc -linkpkg -syntax camlp4o -package 'lwt, js_of_ocaml.syntax,js_of_ocaml,js_of_ocaml.tyxml,unix' main.cmo -o main.byte
+# Compilation successful.
