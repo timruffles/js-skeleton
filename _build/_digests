@@ -1,4 +1,4 @@
-"Resource: /Users/timruffles/dev/learning/ocaml/js-of-ocaml/main.ml": "\146±ÖºÜõ\000Ö¹>5å\027UğY"
-"Rule: ocaml: cmo* -> byte (%=main )": "`WF6\024H¸Éj¯ôÔ§h²7"
-"Rule: ocaml: ml -> cmo & cmi (%=main )": "D»&G§7\148\143¿'\020\151poÊ£"
-"Rule: ocaml dependencies ml (%=main )": "\148\016q\030íïTÇ\021s&ÆÍÊëR"
+"Resource: /Users/timruffles/dev/learning/ocaml/js-of-ocaml/main.ml": "3e¶HMÊò&·;D¹&a\005¯"
+"Rule: ocaml: cmo* -> byte (%=main )": "zÎ\bÓ£x\003|Rvç$\018ê\025\138"
+"Rule: ocaml: ml -> cmo & cmi (%=main )": "n¤»öÜµU:¼ò«ÎFyØ\031"
+"Rule: ocaml dependencies ml (%=main )": "\143Ê§÷'&ZøE:\155\024\154£2¹"

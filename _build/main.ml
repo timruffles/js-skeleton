@@ -35,6 +35,7 @@ module Model : sig
   val start : unit -> unit
   val stop : unit -> unit
   val lap : unit -> unit
+  val getLaps : string S.t
 end = struct
 
 
@@ -44,23 +45,38 @@ end = struct
   let start () =
     set_state (`Running_since ((S.value Time.current), []))
 
+  let lapTime current runningSince =
+    current -. runningSince
+
   let lap () =
-    set_state (`Running_since ((S.value Time.current), []))
+    let currentTime = S.value Time.current in
+      set_state (
+        match S.value state with
+        | `Running_since (start, laps) -> `Running_since (currentTime, (lapTime currentTime start) :: laps)
+        | `Stopped_showing _ | `Clear -> `Clear
+      )
 
 
   let stop () =
     set_state (
       match S.value state with
-      | `Running_since (start, laps) -> `Stopped_showing (S.value Time.current -. start)
+      | `Running_since (start, _) -> `Stopped_showing (S.value Time.current -. start)
       | `Stopped_showing _ | `Clear -> `Clear
     )
 
   (* [calc time state] returns the string to display for a given time and state.
      Note: it works on regular values, not signals. *)
   let calc time = function
-    | `Running_since (start, laps) -> Printf.sprintf "%.0f s" (time -. start)
+    | `Running_since (start, _) -> Printf.sprintf "%.0f s" (time -. start)
     | `Stopped_showing x -> Printf.sprintf "%.0f s (stopped)" x
     | `Clear -> "Ready"
+
+  let formatLaps = function
+    | `Running_since (_, laps) -> laps |> List.map (Printf.sprintf "%.0f ") |> String.concat " "
+    | _ -> ""
+
+  let getLaps =
+    S.l1 formatLaps state
 
   let display =
     (* [S.l2 calc] lifts the 2-argument function [calc] to work on 2 signals.
@@ -84,6 +100,7 @@ end = struct
 
   let main = div [
     div ~a:[a_class ["display"]] [R.pcdata Model.display];
+    div ~a:[] [R.pcdata Model.getLaps];
     button ~a:[onclick Model.start] [pcdata "Start"];
     button ~a:[onclick Model.stop] [pcdata "Stop"];
     button ~a:[onclick Model.lap] [pcdata "Lap"];
