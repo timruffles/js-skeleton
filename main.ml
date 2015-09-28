@@ -34,11 +34,19 @@ module Model : sig
   val display : string S.t  (** The output value to display on the screen *)
   val start : unit -> unit
   val stop : unit -> unit
+  val lap : unit -> unit
 end = struct
+
+
+  (** this is pattern matching to destructure **)
   let state, set_state = S.create `Clear
 
   let start () =
     set_state (`Running_since (S.value Time.current))
+
+  let lap () =
+    set_state (`Running_since (S.value Time.current))
+
 
   let stop () =
     set_state (
@@ -78,6 +86,7 @@ end = struct
     div ~a:[a_class ["display"]] [R.pcdata Model.display];
     button ~a:[onclick Model.start] [pcdata "Start"];
     button ~a:[onclick Model.stop] [pcdata "Stop"];
+    button ~a:[onclick Model.lap] [pcdata "Lap"];
   ]
 end
 
